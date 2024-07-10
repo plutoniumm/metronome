@@ -4,19 +4,17 @@ const countdown = document.getElementById( "countdown" );
 const volume = document.getElementById( "volume" );
 const tempo = document.getElementById( "tempo" );
 
-let masterVolume = 1;
+let masterVolume = 50;
 
 const conga = new Tone.MembraneSynth( {
-  pitchDecay: 0.01,
-  octaves: 2,
-  envelope: { attack: 0.0006, decay: 0.5, sustain: 0 },
+  pitchDecay: 0.02,
+  octaves: 8,
+  envelope: { attack: 0.0001, decay: 0.2, sustain: 0.0001 / 1000 },
 } ).toDestination();
 
-const congaPart = new Tone.Sequence( ( t, p ) => {
+new Tone.Sequence( ( t, p ) => {
   conga.triggerAttack( p, t, Math.random() * 0.5 + 0.5 );
-}, [ "G3", "G3", "G3", "G3" ], "4n" ).start( 0 );
-
-Tone.Transport.bpm.value = 60;
+}, [ "F3", "C3b", "F3", "C3b" ], "4n" ).start( 0 );
 
 
 function updateTempo ( value ) {
@@ -32,18 +30,17 @@ function updateVolume ( value ) {
 
 let countdownTimer;
 function startCount ( duration ) {
-  let timer = duration, hours, minutes, seconds;
+  let timer = duration, h, m, s;
   countdownTimer = setInterval( () => {
-    hours = parseInt( timer / 3600, 10 );
-    minutes = parseInt( ( timer % 3600 ) / 60, 10 );
-    seconds = parseInt( timer % 60, 10 );
+    h = parseInt( timer / 3600, 10 );
+    m = parseInt( ( timer % 3600 ) / 60, 10 );
+    s = parseInt( timer % 60, 10 );
 
-    hours = hours < 10 ? "0" + hours : hours;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+    h = h < 10 ? "0" + h : h;
+    m = m < 10 ? "0" + m : m;
+    s = s < 10 ? "0" + s : s;
 
-    countdown.textContent = `${ hours }:${ minutes }:${ seconds }`;
-
+    countdown.textContent = `${ h }:${ m }:${ s }`;
     if ( --timer < 0 ) {
       clearInterval( countdownTimer );
       Tone.Transport.stop();
@@ -52,7 +49,6 @@ function startCount ( duration ) {
 }
 
 function playPause () {
-  const T = Tone.Transport;
   if ( T.state === "started" ) {
     T.pause();
     clearInterval( countdownTimer );
@@ -63,11 +59,15 @@ function playPause () {
 }
 
 function stop () {
-  const T = Tone.Transport;
   T.stop();
   clearInterval( countdownTimer );
   countdown.textContent = "01:00:00";
 }
+
+const T = Tone.Transport;
+T.bpm.value = 60;
+updateVolume( masterVolume )
+updateTempo( 60 );
 
 window.playPause = playPause;
 window.updateTempo = updateTempo;

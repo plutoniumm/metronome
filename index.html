@@ -16,46 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown Timer</title>
     <script type="module" src="./metro.js"></script>
-
-    <style>
-      body {
-        font-family: sans-serif;
-        height: 100vh;
-      }
-
-      #countdown {
-        font-size: 3rem;
-        margin: 1rem;
-      }
-
-      .f {
-        display: flex;
-        justify-content: space-between;
-        margin: 1rem;
-      }
-
-      input[type="range"] {
-        width: 100%;
-      }
-
-      button {
-        padding: 1rem;
-        margin: 1rem;
-        font-size: 1rem;
-      }
-
-      #add {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-      }
-
-      #stop {
-        background-color: #f44336;
-        color: white;
-        border: none;
-      }
-    </style>
+    <link rel="stylesheet" href="./global.css">
   </head>
 
 <body class="tc m0 j-ct al-ct f-col">
@@ -68,13 +29,13 @@
     <div style="flex:1;">
       <h6>Tempo</h6>
       <output id="tempo">60</output>
-      <input type="range" min="40" max="200" value="60" oninput="updateTempo(event.target.value)">
+      <input type="range" min="40" max="200" oninput="updateTempo(event.target.value)">
     </div>
 
     <div style="flex:1;">
       <h6>Volume</h6>
       <output id="volume">100</output>
-      <input type="range" min="0" max="100" value="100" oninput="updateVolume(event.target.value)">
+      <input type="range" min="0" max="100" oninput="updateVolume(event.target.value)">
     </div>
   </div>
 </body>
