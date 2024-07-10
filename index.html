@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width user-scalable=no">
+  <title>Metronome</title>
+
+  <link rel="stylesheet" href="https://manav.ch/atomic.css">
+
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <script type="module" src="./metro.js"></script>
+
+    <style>
+      body {
+        font-family: sans-serif;
+        height: 100vh;
+      }
+
+      #countdown {
+        font-size: 3rem;
+        margin: 1rem;
+      }
+
+      .f {
+        display: flex;
+        justify-content: space-between;
+        margin: 1rem;
+      }
+
+      input[type="range"] {
+        width: 100%;
+      }
+
+      button {
+        padding: 1rem;
+        margin: 1rem;
+        font-size: 1rem;
+      }
+
+      #add {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+      }
+
+      #stop {
+        background-color: #f44336;
+        color: white;
+        border: none;
+      }
+    </style>
+  </head>
+
+<body class="tc m0 j-ct al-ct f-col">
+  <button id="add" onclick="playPause();">Start/Pause Countdown</button>
+  <button id="stop" onclick="stop();">Stop Countdown</button>
+
+  <div id="countdown">01:00:00</div>
+
+  <div class="f w-100">
+    <div style="flex:1;">
+      <h6>Tempo</h6>
+      <output id="tempo">60</output>
+      <input type="range" min="40" max="200" value="60" oninput="updateTempo(event.target.value)">
+    </div>
+
+    <div style="flex:1;">
+      <h6>Volume</h6>
+      <output id="volume">100</output>
+      <input type="range" min="0" max="100" value="100" oninput="updateVolume(event.target.value)">
+    </div>
+  </div>
+</body>
+
+</html>
+
+
+
+</html>
